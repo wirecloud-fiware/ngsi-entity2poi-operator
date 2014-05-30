@@ -12,7 +12,7 @@
     <wire:Operator rdf:about="http://wirecloud.com/test">
         <dcterms:title>ngsientity2poi</dcterms:title>
         <wire:displayName>NGSI Entity To PoI</wire:displayName>
-        <dcterms:description>This operator transforms NGSI entities (as the ones coming from the NGSI source operator) to Points of Interest. To be able to do so, those entities should contain an attribute containing the coordinate of the entity. Also, take into account the fact this operator is generic, so market bubbles will be a simple composition of the pairs attribute/value.</dcterms:description>
+        <dcterms:description>This operator transforms NGSI entities (as the ones coming from the NGSI source operator) to Points of Interest. To be able to do so, those entities should contain an attribute containing the coordinates of the entity. Also, take into account the fact this operator is generic, so marker bubbles of the pois created by this operator will be a mere composition of the attribute/value pairs.</dcterms:description>
         <dcterms:creator rdf:resource="http://creatoruri/"/>
         <usdl-core:versionInfo>2.99</usdl-core:versionInfo>
         <wire:hasImageUri rdf:resource="images/catalogue.png"/>
