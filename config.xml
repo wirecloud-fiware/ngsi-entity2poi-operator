@@ -17,7 +17,7 @@
         <usdl-core:versionInfo>2.99</usdl-core:versionInfo>
         <wire:hasImageUri rdf:resource="images/catalogue.png"/>
         <usdl-core:utilizedResource rdf:resource="js/main.js"/>
-        <foaf:page rdf:resource="doc/index.html"/>
+        <foaf:page rdf:resource="https://github.com/wirecloud-fiware/ngsientity2poi"/>
         <usdl-core:hasProvider rdf:resource="http://vendoruri/"/>
 
         <vCard:addr>
