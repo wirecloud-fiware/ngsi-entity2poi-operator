@@ -1,79 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:usdl-core="http://www.linked-usdl.org/ns/usdl-core#"
-    xmlns:foaf="http://xmlns.com/foaf/0.1/"
-    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-    xmlns:dcterms="http://purl.org/dc/terms/"
-    xmlns:skos="http://www.w3.org/2004/02/skos/core#"
-    xmlns:wire="http://wirecloud.conwet.fi.upm.es/ns/widget#"
-    xmlns:vCard = "http://www.w3.org/2006/vcard/ns#"
-    xmlns:gr="http://purl.org/goodrelations/v1#">
-
-    <wire:Operator rdf:about="http://wirecloud.com/test">
-        <dcterms:title>ngsientity2poi</dcterms:title>
-        <wire:displayName>NGSI Entity To PoI</wire:displayName>
-        <dcterms:description>This operator transforms NGSI entities (as the ones coming from the NGSI source operator) to Points of Interest. To be able to do so, those entities should contain an attribute containing the coordinates of the entity. Also, take into account the fact this operator is generic, so marker bubbles of the pois created by this operator will be a mere composition of the attribute/value pairs.</dcterms:description>
-        <dcterms:creator rdf:resource="http://creatoruri/"/>
-        <usdl-core:versionInfo>2.99</usdl-core:versionInfo>
-        <wire:hasImageUri rdf:resource="images/catalogue.png"/>
-        <usdl-core:utilizedResource rdf:resource="js/main.js"/>
-        <foaf:page rdf:resource="https://github.com/wirecloud-fiware/ngsientity2poi"/>
-        <usdl-core:hasProvider rdf:resource="http://vendoruri/"/>
-
-        <vCard:addr>
-            <vCard:Work>
-                <vCard:email>aarranz@conwet.com</vCard:email>
-            </vCard:Work>
-        </vCard:addr>
-
-        <wire:hasPlatformPreference>
-            <wire:PlatformPreference>
-                <dcterms:title>coordinates_attr</dcterms:title>
-                <wire:type>text</wire:type>
-                <dcterms:description>Name of the entity attribute where the coordinates are stored</dcterms:description>
-                <rdfs:label>Coordinates attribute</rdfs:label>
-                <wire:default>position</wire:default>
-                <wire:index>0</wire:index>
-            </wire:PlatformPreference>
-        </wire:hasPlatformPreference>
-        <wire:hasPlatformWiring>
-            <wire:PlatformWiring rdf:ID="wiring">
-                <wire:hasInputEndpoint>
-                    <wire:InputEndpoint rdf:ID="input_1">
-                        <dcterms:title>entityInput</dcterms:title>
-                        <dcterms:description>Received entity will be transform to a PoI</dcterms:description>
-                        <wire:actionLabel>Entity2Poi</wire:actionLabel>
-                        <wire:type>text</wire:type>
-                        <rdfs:label>Entity</rdfs:label>
-                        <wire:friendcode>entity</wire:friendcode>
-                    </wire:InputEndpoint>
-                </wire:hasInputEndpoint>
-                <wire:hasOutputEndpoint>
-                    <wire:OutputEndpoint rdf:ID="output_1">
-                        <dcterms:title>poiOutput</dcterms:title>
-                        <dcterms:description>Transformed Point of Interest from the received entity</dcterms:description>
-                        <wire:type>text</wire:type>
-                        <rdfs:label>PoI</rdfs:label>
-                        <wire:friendcode>poi</wire:friendcode>
-                    </wire:OutputEndpoint>
-                </wire:hasOutputEndpoint>
-            </wire:PlatformWiring>
-        </wire:hasPlatformWiring>
-    </wire:Operator>
-
-    <foaf:Person rdf:about="http://creatoruri/">
-        <foaf:name>aarranz</foaf:name>
-    </foaf:Person>
-
-    <gr:BusinessEntity rdf:about="http://vendoruri/">
-        <foaf:name>CoNWeT</foaf:name>
-    </gr:BusinessEntity>
-
-    <foaf:Image rdf:about="images/catalogue.png">
-        <dcterms:title>ImageURI</dcterms:title>
-    </foaf:Image>
-
-    <usdl-core:Resource rdf:about="js/main.js">
-        <wire:index>0</wire:index>
-    </usdl-core:Resource>
-</rdf:RDF>
+<?xml version='1.0' encoding='UTF-8'?>
+<operator xmlns="http://wirecloud.conwet.fi.upm.es/ns/macdescription/1" vendor="CoNWeT" name="ngsientity2poi" version="2.99">
+  <details>
+    <title>NGSI Entity To PoI</title>
+    <homepage>https://github.com/wirecloud-fiware/ngsientity2poi</homepage>
+    <authors>aarranz</authors>
+    <email>aarranz@conwet.com</email>
+    <image>images/catalogue.png</image>
+    <description>Convert NGSI entities coming from the orion context broker to Point of Interests (usable by map widgets).</description>
+    <description>DESCRIPTION.md</description>
+    <doc>https://github.com/wirecloud-fiware/ngsientity2poi</doc>
+  </details>
+  <preferences>
+    <preference name="coordinates_attr" label="Coordinates attribute" description="Name of the entity attribute where the coordinates are stored" default="position"/>
+  </preferences>
+  <wiring>
+    <outputendpoint name="poiOutput" type="text" label="PoI" description="Transformed Point of Interest from the received entity" friendcode="poi"/>
+    <inputendpoint name="entityInput" type="text" label="Entity" description="Received entity will be transform to a PoI" friendcode="entity"/>
+  </wiring>
+  <scripts>
+    <script src="js/main.js"/>
+  </scripts>
+</operator>
