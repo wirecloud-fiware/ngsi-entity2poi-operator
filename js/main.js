@@ -46,18 +46,26 @@
     MashupPlatform.wiring.registerCallback("entityInput", function (entityString) {
         var entity = JSON.parse(entityString);
         var coordinates = null;
+        var coord_parts = null;
+        var coordinates_pref = MashupPlatform.prefs.get('coordinates_attr');
+        var attributes = coordinates_pref.split(new RegExp(',\\s*'));
+        if (attributes.length < 1) {
+            return;
+        } else if (attributes.length >= 2 && entity[attributes[0]] != null && entity[attributes[1]] != null) {
+            coord_parts = [
+                entity[attributes[0]],
+                entity[attributes[1]]
+            ];
+        } else if (entity[attributes[0]]) {
+            coord_parts = entity[attributes[0]].split(new RegExp(',\\s*'));
+        }
 
-        var coordinates_attr = MashupPlatform.prefs.get('coordinates_attr');
-
-        if (entity[coordinates_attr]) {
-            var parts = entity[coordinates_attr].split(new RegExp(',\\s*'));
-            if (parts.length === 2) {
-                coordinates = {
-                    system: "WGS84",
-                    lat: parseFloat(parts[0]),
-                    lng: parseFloat(parts[1])
-                };
-            }
+        if (coord_parts != null && coord_parts.length === 2) {
+            coordinates = {
+                system: "WGS84",
+                lat: parseFloat(coord_parts[0]),
+                lng: parseFloat(coord_parts[1])
+            };
         }
 
         if (coordinates) {

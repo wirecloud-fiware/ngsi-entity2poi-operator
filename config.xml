@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<operator xmlns="http://wirecloud.conwet.fi.upm.es/ns/macdescription/1" vendor="CoNWeT" name="ngsientity2poi" version="2.99">
+<operator xmlns="http://wirecloud.conwet.fi.upm.es/ns/macdescription/1" vendor="CoNWeT" name="ngsientity2poi" version="3.0">
   <details>
     <title>NGSI Entity To PoI</title>
     <homepage>https://github.com/wirecloud-fiware/ngsientity2poi</homepage>
@@ -7,11 +7,12 @@
     <email>aarranz@conwet.com</email>
     <image>images/catalogue.png</image>
     <description>Convert NGSI entities coming from the orion context broker to Point of Interests (usable by map widgets).</description>
-    <description>DESCRIPTION.md</description>
+    <longdescription>DESCRIPTION.md</longdescription>
     <doc>https://github.com/wirecloud-fiware/ngsientity2poi</doc>
+    <changelog>doc/changelog.md</changelog>
   </details>
   <preferences>
-    <preference name="coordinates_attr" label="Coordinates attribute" description="Name of the entity attribute where the coordinates are stored" default="position"/>
+    <preference name="coordinates_attr" label="Coordinates attribute" description="Name of the entity attribute where the coordinates are stored. If the entity provides the coordinates through a pair of attributes, you can pass those names using a comma (e.g. 'latitude, longitude')" default="position" type="text"/>
   </preferences>
   <wiring>
     <outputendpoint name="poiOutput" type="text" label="PoI" description="Transformed Point of Interest from the received entity" friendcode="poi"/>
