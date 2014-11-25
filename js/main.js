@@ -81,5 +81,15 @@
         return infoWindow;
     };
 
-    icon = internalUrl('images/icon.png');
+    var updateMarkerIcon = function updateMarkerIcon() {
+        icon = MashupPlatform.prefs.get('marker-icon');
+        if (icon == '') {
+            icon = internalUrl('images/icon.png');
+        }
+    };
+
+    MashupPlatform.prefs.registerCallback(updateMarkerIcon);
+    // Init initial marker icon
+    updateMarkerIcon();
+
 })();
