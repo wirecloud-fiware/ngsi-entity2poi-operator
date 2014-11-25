@@ -10,7 +10,7 @@
     <longdescription>DESCRIPTION.md</longdescription>
     <license>Apache License 2.0</license>
     <licenseurl>http://www.apache.org/licenses/LICENSE-2.0.html</licenseurl>
-    <doc>https://github.com/wirecloud-fiware/ngsientity2poi</doc>
+    <doc>doc/index.md</doc>
     <changelog>doc/changelog.md</changelog>
   </details>
   <preferences>
