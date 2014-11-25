@@ -1,3 +1,9 @@
+3.0.3
+=====
+
+* Initial documentation of the operator.
+* Support for custom marker icons (added a new setting for this purpose).
+
 3.0
 ===
 
