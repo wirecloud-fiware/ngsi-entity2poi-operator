@@ -8,6 +8,8 @@
     <image>images/catalogue.png</image>
     <description>Convert NGSI entities coming from the orion context broker to Point of Interests (usable by map widgets).</description>
     <longdescription>DESCRIPTION.md</longdescription>
+    <license>Apache License 2.0</license>
+    <licenseurl>http://www.apache.org/licenses/LICENSE-2.0.html</licenseurl>
     <doc>https://github.com/wirecloud-fiware/ngsientity2poi</doc>
     <changelog>doc/changelog.md</changelog>
   </details>
