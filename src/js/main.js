@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-/*global MashupPlatform*/
+/* globals MashupPlatform */
 
 (function () {
 
