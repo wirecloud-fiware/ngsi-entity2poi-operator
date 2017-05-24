@@ -2,7 +2,7 @@
 <operator xmlns="http://wirecloud.conwet.fi.upm.es/ns/macdescription/1" vendor="CoNWeT" name="ngsientity2poi" version="3.0.3">
   <details>
     <title>NGSI Entity To PoI</title>
-    <homepage>https://github.com/wirecloud-fiware/ngsientity2poi</homepage>
+    <homepage>https://github.com/wirecloud-fiware/ngsi-entity2poi-operator</homepage>
     <authors>aarranz</authors>
     <email>aarranz@conwet.com</email>
     <image>images/catalogue.png</image>
@@ -12,6 +12,7 @@
     <licenseurl>http://www.apache.org/licenses/LICENSE-2.0.html</licenseurl>
     <doc>doc/index.md</doc>
     <changelog>doc/changelog.md</changelog>
+    <issuetracker>https://github.com/wirecloud-fiware/ngsi-entity2poi-operator/issues</issuetracker>
   </details>
     <preferences>
         <preference name="coordinates_attr" label="Coordinates attribute" description="Name of the entity attribute where the coordinates are stored. If the entity provides the coordinates through a pair of attributes, you can pass those names using a comma (e.g. 'latitude, longitude')" default="position" type="text"/>
