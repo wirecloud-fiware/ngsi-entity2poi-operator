@@ -51,16 +51,26 @@
                 entity[attributes[0]],
                 entity[attributes[1]]
             ];
-        } else if (entity[attributes[0]]) {
-            coord_parts = entity[attributes[0]].split(new RegExp(',\\s*'));
-        }
-
-        if (coord_parts != null && coord_parts.length === 2) {
-            coordinates = {
-                system: "WGS84",
-                lat: parseFloat(coord_parts[0]),
-                lng: parseFloat(coord_parts[1])
-            };
+        } else if (entity[attributes[0]] != null) {
+            coordinates = entity[attributes[0]];
+            if (typeof coordinates === "object") {
+                // GeoJSON format: longitude, latitude[, elevation]
+                // WireCloud: latitude and longitude
+                coordinates = {
+                    system: "WGS84",
+                    lng: parseFloat(entity.location.coordinates[0]),
+                    lat: parseFloat(entity.location.coordinates[1])
+                };
+            } else {
+                coord_parts = entity[attributes[0]].split(new RegExp(',\\s*'));
+                if (coord_parts != null && coord_parts.length === 2) {
+                    coordinates = {
+                        system: "WGS84",
+                        lat: parseFloat(coord_parts[0]),
+                        lng: parseFloat(coord_parts[1])
+                    };
+                }
+            }
         }
 
         if (coordinates) {
