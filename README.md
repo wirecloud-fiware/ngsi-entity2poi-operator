@@ -1,4 +1,4 @@
-# NGSI datamodel 2 PoI operator
+# NGSI Entity 2 PoI operator
 
 This operator transforms NGSI entities (as the ones coming from the NGSI source operator) to Points of Interest. To be able to do so, those entities should contain an attribute containing the coordinates of the entity. Also, take into account the fact this operator is generic, so marker bubbles of the PoIs created by this operator will be a mere composition of the attribute/value pairs.
 
