@@ -22,8 +22,24 @@
 
     var icon;
 
-    MashupPlatform.wiring.registerCallback("entityInput", function (entityString) {
-        var entity = JSON.parse(entityString);
+    MashupPlatform.wiring.registerCallback("entityInput", function (entities) {
+        if (entities === "string") {
+            try {
+                entities = JSON.parse(entities);
+            } catch (e) {
+                throw new MashupPlatform.wiring.EndpointTypeError();
+            }
+        }
+
+        if (!Array.isArray(entities)) {
+            entities = [entities];
+        }
+
+        var pois = entities.map(processEntity).filter(function (poi) {return poi != null;});
+        MashupPlatform.wiring.pushEvent("poiOutput", pois);
+    });
+
+    var processEntity = function processEntity(entity) {
         var coordinates = null;
         var coord_parts = null;
         var coordinates_pref = MashupPlatform.prefs.get('coordinates_attr');
@@ -48,9 +64,9 @@
         }
 
         if (coordinates) {
-            MashupPlatform.wiring.pushEvent("poiOutput", JSON.stringify(entity2poi(entity, coordinates)));
+            return entity2poi(entity, coordinates);
         }
-    });
+    };
 
     var entity2poi = function entity2poi(entity, coordinates) {
         var poi = {
