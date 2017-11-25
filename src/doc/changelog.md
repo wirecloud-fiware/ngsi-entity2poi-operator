@@ -1,4 +1,4 @@
-## 3.0.4 (2017-11-25)
+## 3.1.0 (2017-11-25)
 
 * Support object encoded input throught the *PoI* input endpoint in addition
   to the already supported JSON encoded strings.
@@ -6,6 +6,7 @@
 * Use entity lists when sending entities throught the output endpoint.
 * Parse geo:json data when the attribute configured using the "Coordinates
   attribute" uses such a value.
+* Use JSON.stringify to render structured values.
 
 
 ## 3.0.3

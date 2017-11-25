@@ -100,7 +100,13 @@
     var buildInfoWindow = function buildInfoWindow(entity) {
         var infoWindow = "<div>";
         for (var attr in entity) {
-            infoWindow += '<span style="font-size:12px;"><b>' + attr + ": </b> " + entity[attr] +  "</span><br />";
+            infoWindow += '<span style="font-size:12px;"><b>' + attr + ": </b> ";
+            if (entity[attr] != null && typeof entity[attr] === "object") {
+                infoWindow += JSON.stringify(entity[attr], null, 4);
+            } else {
+                infoWindow += entity[attr];
+            }
+            infoWindow +=  "</span><br />";
         }
         infoWindow += "</div>";
 
