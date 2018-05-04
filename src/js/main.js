@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2014 CoNWeT Lab., Universidad Politécnica de Madrid
+ * Copyright (c) 2018 Future Internet Consulting and Development Solutions S.L.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +24,7 @@
     var icon;
 
     MashupPlatform.wiring.registerCallback("entityInput", function (entities) {
-        if (entities === "string") {
+        if (typeof entities === "string") {
             try {
                 entities = JSON.parse(entities);
             } catch (e) {
