@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-/* globals MashupPlatform, MockMP, beforeAll, afterAll, beforeEach, processData */
+/* globals MashupPlatform, MockMP, beforeAll, afterAll, beforeEach, entity2poi, processData, processEntity */
 
 (function () {
 
@@ -88,6 +88,64 @@
             processData([{}]);
 
             expect(processEntity).toHaveBeenCalledWith({}, 0, [{}]);
+        });
+
+        it("support comma separated coordinates", () => {
+            spyOn(window, 'entity2poi');
+            MashupPlatform.prefs.set('coordinates_attr', 'location');
+
+            let entity = {location: "0, 1"};
+            processEntity(entity);
+
+            expect(entity2poi).toHaveBeenCalledWith(entity, [0, 1]);
+        });
+
+        it("support comma separated coordinates (missing longitude)", () => {
+            spyOn(window, 'entity2poi');
+            MashupPlatform.prefs.set('coordinates_attr', 'location');
+
+            let entity = {location: "0"};
+            processEntity(entity);
+
+            expect(entity2poi).not.toHaveBeenCalled();
+        });
+
+        it("support coordinates splitted into two attributes", () => {
+            spyOn(window, 'entity2poi');
+            MashupPlatform.prefs.set('coordinates_attr', 'latitude, longitude');
+
+            let entity = {latitude: 0, longitude: 1};
+            processEntity(entity);
+
+            expect(entity2poi).toHaveBeenCalledWith(entity, [0, 1]);
+        });
+
+        it("support coordinates splitted into two attributes (missing latitude)", () => {
+            spyOn(window, 'entity2poi');
+            MashupPlatform.prefs.set('coordinates_attr', 'latitude, longitude');
+
+            processEntity({longitude: 0});
+
+            expect(entity2poi).not.toHaveBeenCalled();
+        });
+
+        it("support coordinates splitted into two attributes (missing longitude)", () => {
+            spyOn(window, 'entity2poi');
+            MashupPlatform.prefs.set('coordinates_attr', 'latitude, longitude');
+
+            processEntity({latitude: 0});
+
+            expect(entity2poi).not.toHaveBeenCalled();
+        });
+
+        it("support geojson coordinates", () => {
+            spyOn(window, 'entity2poi');
+            MashupPlatform.prefs.set('coordinates_attr', 'location');
+
+            let entity = {location: {type: "Point", coordinates: [0, 1]}};
+            processEntity(entity);
+
+            expect(entity2poi).toHaveBeenCalledWith(entity, [0, 1]);
         });
 
     });

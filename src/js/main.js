@@ -17,7 +17,7 @@
 
 /* globals MashupPlatform */
 
-var processData, processEntity;
+var entity2poi, processData, processEntity;
 
 (function () {
 
@@ -47,6 +47,7 @@ var processData, processEntity;
     };
 
     processEntity = function processEntity(entity) {
+        // coordinates: latitude and longitude
         var coordinates = null;
         var coord_parts = null;
         var coordinates_pref = MashupPlatform.prefs.get('coordinates_attr');
@@ -54,28 +55,25 @@ var processData, processEntity;
         if (attributes.length < 1) {
             return;
         } else if (attributes.length >= 2 && entity[attributes[0]] != null && entity[attributes[1]] != null) {
-            coord_parts = [
+            coordinates = [
                 entity[attributes[0]],
                 entity[attributes[1]]
             ];
         } else if (entity[attributes[0]] != null) {
-            coordinates = entity[attributes[0]];
-            if (typeof coordinates === "object") {
+            coord_parts = entity[attributes[0]];
+            if (typeof coord_parts === "object") {
                 // GeoJSON format: longitude, latitude[, elevation]
-                // WireCloud: latitude and longitude
-                coordinates = {
-                    system: "WGS84",
-                    lng: parseFloat(entity.location.coordinates[0]),
-                    lat: parseFloat(entity.location.coordinates[1])
-                };
-            } else {
+                coordinates = [
+                    parseFloat(coord_parts.coordinates[0]),
+                    parseFloat(coord_parts.coordinates[1])
+                ];
+            } else if (typeof coord_parts === "string") {
                 coord_parts = entity[attributes[0]].split(new RegExp(',\\s*'));
                 if (coord_parts != null && coord_parts.length === 2) {
-                    coordinates = {
-                        system: "WGS84",
-                        lat: parseFloat(coord_parts[0]),
-                        lng: parseFloat(coord_parts[1])
-                    };
+                    coordinates = [
+                        parseFloat(coord_parts[0]),
+                        parseFloat(coord_parts[1])
+                    ];
                 }
             }
         }
@@ -85,14 +83,19 @@ var processData, processEntity;
         }
     };
 
-    var entity2poi = function entity2poi(entity, coordinates) {
+    entity2poi = function entity2poi(entity, coordinates) {
         var poi = {
             id: entity.id,
             icon: icon,
             tooltip: entity.id,
             data: entity,
             infoWindow: buildInfoWindow.call(this, entity),
-            currentLocation: coordinates
+            // Provide a currentLocation attribute for backward compatibility
+            currentLocation: {
+                system: "WGS84",
+                lat: coordinates[0],
+                lng: coordinates[1]
+            }
         };
 
         return poi;
