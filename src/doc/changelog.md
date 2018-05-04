@@ -1,3 +1,8 @@
+## 3.1.1 (2018-05-05)
+
+- Fix bug managing object encoded input data. Fix #1
+
+
 ## 3.1.0 (2017-11-25)
 
 * Support object encoded input throught the *PoI* input endpoint in addition
