@@ -1,3 +1,8 @@
+## 3.1.2 (2018-05-05)
+
+- Fix some problems managing entity coordinates.
+
+
 ## 3.1.1 (2018-05-05)
 
 - Fix bug managing object encoded input data. Fix #1
