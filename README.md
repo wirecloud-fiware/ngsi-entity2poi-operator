@@ -52,6 +52,7 @@ available on Read the Docs.
 ## Copyright and License
 
 Copyright (c) 2014-2017 CoNWeT Lab., Universidad Politecnica de Madrid
+Copyright (c) 2018 Future Internet Consulting and Development Solutions S.L.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

@@ -23,7 +23,7 @@
 
     var icon;
 
-    MashupPlatform.wiring.registerCallback("entityInput", function (entities) {
+    var processData = function processData(entities) {
         if (typeof entities === "string") {
             try {
                 entities = JSON.parse(entities);
@@ -38,7 +38,7 @@
 
         var pois = entities.map(processEntity).filter(function (poi) {return poi != null;});
         MashupPlatform.wiring.pushEvent("poiOutput", pois);
-    });
+    };
 
     var processEntity = function processEntity(entity) {
         var coordinates = null;
@@ -121,8 +121,19 @@
         }
     };
 
-    MashupPlatform.prefs.registerCallback(updateMarkerIcon);
-    // Init initial marker icon
-    updateMarkerIcon();
+    /* TODO
+     * this if is required for testing, but we have to search a cleaner way
+     */
+    if (window.MashupPlatform != null) {
+        MashupPlatform.prefs.registerCallback(updateMarkerIcon);
+        MashupPlatform.wiring.registerCallback("entityInput", processData);
+
+        // Init initial marker icon
+        updateMarkerIcon();
+    }
+
+    /* test-code */
+    window.processData = processData;
+    /* end-test-code */
 
 })();
