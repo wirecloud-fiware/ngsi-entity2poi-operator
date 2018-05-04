@@ -17,19 +17,25 @@
 
 /* globals MashupPlatform */
 
+var processData, processEntity;
+
 (function () {
 
     "use strict";
 
     var icon;
 
-    var processData = function processData(entities) {
+    processData = function processData(entities) {
         if (typeof entities === "string") {
             try {
                 entities = JSON.parse(entities);
             } catch (e) {
                 throw new MashupPlatform.wiring.EndpointTypeError();
             }
+        }
+
+        if (entities == null || typeof entities !== "object") {
+            throw new MashupPlatform.wiring.EndpointTypeError();
         }
 
         if (!Array.isArray(entities)) {
@@ -40,7 +46,7 @@
         MashupPlatform.wiring.pushEvent("poiOutput", pois);
     };
 
-    var processEntity = function processEntity(entity) {
+    processEntity = function processEntity(entity) {
         var coordinates = null;
         var coord_parts = null;
         var coordinates_pref = MashupPlatform.prefs.get('coordinates_attr');
@@ -131,9 +137,5 @@
         // Init initial marker icon
         updateMarkerIcon();
     }
-
-    /* test-code */
-    window.processData = processData;
-    /* end-test-code */
 
 })();

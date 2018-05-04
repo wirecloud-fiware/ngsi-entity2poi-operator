@@ -40,20 +40,54 @@
             MashupPlatform.reset();
         });
 
+        it("throws an Endpoint Value error if data is not valid JSON data", () => {
+            expect(function () {
+                processData("{a}");
+            }).toThrowError(MashupPlatform.wiring.EndpointTypeError);
+        });
+
+        it("throws an Endpoint Type error if data is not a JSON object", () => {
+            expect(function () {
+                processData("5");
+            }).toThrowError(MashupPlatform.wiring.EndpointTypeError);
+        });
+
+        it("throws an Endpoint Type error if data is not an object", () => {
+            expect(function () {
+                processData(5);
+            }).toThrowError(MashupPlatform.wiring.EndpointTypeError);
+        });
+
         it("handles entities simple string entities", () => {
+            spyOn(window, 'processEntity');
+
             processData("{}");
+
+            expect(processEntity).toHaveBeenCalledWith({}, 0, [{}]);
         });
 
         it("handles entities simple object entities", () => {
+            spyOn(window, 'processEntity');
+
             processData({});
+
+            expect(processEntity).toHaveBeenCalledWith({}, 0, [{}]);
         });
 
         it("handles string entity lists", () => {
+            spyOn(window, 'processEntity');
+
             processData("[{}]");
+
+            expect(processEntity).toHaveBeenCalledWith({}, 0, [{}]);
         });
 
         it("handles object entity lists", () => {
+            spyOn(window, 'processEntity');
+
             processData([{}]);
+
+            expect(processEntity).toHaveBeenCalledWith({}, 0, [{}]);
         });
 
     });
