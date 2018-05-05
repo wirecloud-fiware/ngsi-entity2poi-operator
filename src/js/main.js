@@ -50,23 +50,28 @@ var entity2poi, processData, processEntity;
         // coordinates: latitude and longitude
         var coordinates = null;
         var coord_parts = null;
+        var geojson = null;
         var coordinates_pref = MashupPlatform.prefs.get('coordinates_attr');
         var attributes = coordinates_pref.split(new RegExp(',\\s*'));
         if (attributes.length < 1) {
             return;
         } else if (attributes.length >= 2 && entity[attributes[0]] != null && entity[attributes[1]] != null) {
             coordinates = [
-                entity[attributes[0]],
-                entity[attributes[1]]
+                parseFloat(entity[attributes[0]]),
+                parseFloat(entity[attributes[1]])
             ];
         } else if (entity[attributes[0]] != null) {
             coord_parts = entity[attributes[0]];
             if (typeof coord_parts === "object") {
-                // GeoJSON format: longitude, latitude[, elevation]
-                coordinates = [
-                    parseFloat(coord_parts.coordinates[0]),
-                    parseFloat(coord_parts.coordinates[1])
-                ];
+                geojson = coord_parts;
+
+                if (geojson.type === "Point") {
+                    // GeoJSON format: longitude, latitude[, elevation]
+                    coordinates = [
+                        parseFloat(coord_parts.coordinates[1]),
+                        parseFloat(coord_parts.coordinates[0])
+                    ];
+                }
             } else if (typeof coord_parts === "string") {
                 coord_parts = entity[attributes[0]].split(new RegExp(',\\s*'));
                 if (coord_parts != null && coord_parts.length === 2) {
@@ -78,25 +83,37 @@ var entity2poi, processData, processEntity;
             }
         }
 
-        if (coordinates) {
-            return entity2poi(entity, coordinates);
+        if (coordinates || geojson) {
+            return entity2poi(entity, coordinates, geojson);
         }
     };
 
-    entity2poi = function entity2poi(entity, coordinates) {
+    entity2poi = function entity2poi(entity, coordinates, geojson) {
         var poi = {
             id: entity.id,
             icon: icon,
             tooltip: entity.id,
             data: entity,
             infoWindow: buildInfoWindow.call(this, entity),
-            // Provide a currentLocation attribute for backward compatibility
-            currentLocation: {
+        };
+
+        if (geojson) {
+            poi.location = geojson;
+        } else {
+            poi.location = {
+                type: "Point",
+                coordinates: [coordinates[1], coordinates[0]]
+            };
+        }
+
+        // Provide a currentLocation attribute for backward compatibility
+        if (coordinates) {
+            poi.currentLocation = {
                 system: "WGS84",
                 lat: coordinates[0],
                 lng: coordinates[1]
-            }
-        };
+            };
+        }
 
         return poi;
     };

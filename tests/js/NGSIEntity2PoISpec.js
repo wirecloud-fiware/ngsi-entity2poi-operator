@@ -97,7 +97,7 @@
             let entity = {location: "0, 1"};
             processEntity(entity);
 
-            expect(entity2poi).toHaveBeenCalledWith(entity, [0, 1]);
+            expect(entity2poi).toHaveBeenCalledWith(entity, [0, 1], null);
         });
 
         it("support comma separated coordinates (missing longitude)", () => {
@@ -117,7 +117,7 @@
             let entity = {latitude: 0, longitude: 1};
             processEntity(entity);
 
-            expect(entity2poi).toHaveBeenCalledWith(entity, [0, 1]);
+            expect(entity2poi).toHaveBeenCalledWith(entity, [0, 1], null);
         });
 
         it("support coordinates splitted into two attributes (missing latitude)", () => {
@@ -142,10 +142,10 @@
             spyOn(window, 'entity2poi');
             MashupPlatform.prefs.set('coordinates_attr', 'location');
 
-            let entity = {location: {type: "Point", coordinates: [0, 1]}};
+            let entity = {location: {type: "Point", coordinates: [1, 0]}};
             processEntity(entity);
 
-            expect(entity2poi).toHaveBeenCalledWith(entity, [0, 1]);
+            expect(entity2poi).toHaveBeenCalledWith(entity, [0, 1], entity.location);
         });
 
     });
