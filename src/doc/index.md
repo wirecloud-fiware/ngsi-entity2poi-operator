@@ -1,5 +1,4 @@
-Introduction
-============
+## Introduction
 
 NGSI entities provided by the NGSI source operator cannot be injected directly
 to map viewer widgets. This is due to the fact that map viewers expect data
@@ -17,7 +16,8 @@ associated point of interest bubbles is to download this operator an use it as
 an skeleton for your improved version of the operator. **Remember to change the
 id metadata** (vendor, name and version) before uploading it again.
 
-Settings
-========
 
+## Settings
 
+-  **Coordinates attribute**: Name of the entity attribute where the coordinates are stored. If the entity provides the coordinates through a pair of attributes, you can pass those names using a comma (e.g. `latitude, longitude`). `location` by default.
+-  **Marker Icon**: Absolute URL pointing to an image that will be used for the markers created by this operator. Leave this setting empty for using the default marker icon. Empty by default.

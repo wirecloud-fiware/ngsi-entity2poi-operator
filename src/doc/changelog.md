@@ -1,3 +1,8 @@
+## 3.2.0 (2019-05-XX)
+
+- Use location as the default attribute for the coordinates attribute.
+
+
 ## 3.1.2 (2018-05-05)
 
 - Fix some problems managing entity coordinates.
