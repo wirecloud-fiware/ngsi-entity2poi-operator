@@ -106,15 +106,6 @@ var entity2poi, processData, processEntity;
             };
         }
 
-        // Provide a currentLocation attribute for backward compatibility
-        if (coordinates) {
-            poi.currentLocation = {
-                system: "WGS84",
-                lat: coordinates[0],
-                lng: coordinates[1]
-            };
-        }
-
         return poi;
     };
 

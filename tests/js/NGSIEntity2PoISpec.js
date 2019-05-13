@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Future Internet Consulting and Development Solutions S.L.
+ * Copyright (c) 2018-2019 Future Internet Consulting and Development Solutions S.L.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -146,6 +146,60 @@
             processEntity(entity);
 
             expect(entity2poi).toHaveBeenCalledWith(entity, [0, 1], entity.location);
+        });
+
+        it("support geojson coordinates (polygon)", () => {
+            spyOn(window, 'entity2poi');
+            MashupPlatform.prefs.set('coordinates_attr', 'location');
+
+            let geojson = {
+                type: "Polygon",
+                coordinates: [
+                    [
+                        [-3.80356167695194, 43.46296641666926],
+                        [-3.803161973253841, 43.46301091092682],
+                        [-3.803147082548618, 43.462879859445884],
+                        [-3.803536474744068, 43.462838666196674],
+                        [-3.80356167695194, 43.46296641666926]
+                    ]
+                ]
+            };
+            let entity = {location: geojson};
+            processEntity(entity);
+
+            expect(entity2poi).toHaveBeenCalledWith(entity, null, geojson);
+        });
+
+        describe("entity2poi(entity, coordinates, geojson)", () => {
+
+            it("Process entities without a geometry", () => {
+                let entity = {location: "0, 1"};
+                entity2poi(entity, [0, 1], null);
+            });
+
+            it("Process point geometries", () => {
+                let geojson = {type: "Point", coordinates: [1, 0]};
+                let entity = {location: geojson};
+                entity2poi(entity, [0, 1], geojson);
+            });
+
+            it("Process polygon geometries", () => {
+                let geojson = {
+                    type: "Polygon",
+                    coordinates: [
+                        [
+                            [-3.80356167695194, 43.46296641666926],
+                            [-3.803161973253841, 43.46301091092682],
+                            [-3.803147082548618, 43.462879859445884],
+                            [-3.803536474744068, 43.462838666196674],
+                            [-3.80356167695194, 43.46296641666926]
+                        ]
+                    ]
+                };
+                let entity = {location: geojson};
+                entity2poi(entity, null, geojson);
+            });
+
         });
 
     });
