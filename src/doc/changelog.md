@@ -1,6 +1,8 @@
-## 3.2.0 (2019-05-XX)
+## 3.2.0 (2019-05-13)
 
 - Use location as the default attribute for the coordinates attribute.
+- Remove support for the deprecated `currentLocation` option used on the map
+    widgets.
 
 
 ## 3.1.2 (2018-05-05)
