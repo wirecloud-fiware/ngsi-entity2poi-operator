@@ -1,3 +1,8 @@
+## 3.2.1 (2019-XX-XX)
+
+- Add tooltip title
+
+
 ## 3.2.0 (2019-05-13)
 
 - Use location as the default attribute for the coordinates attribute.

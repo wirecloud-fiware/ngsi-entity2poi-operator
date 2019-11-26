@@ -200,6 +200,13 @@
                 entity2poi(entity, null, geojson);
             });
 
+            it("Process entity with id", () => {
+                let entity = {id: "id001", location: "0, 1"};
+                let poi = entity2poi(entity, [0, 1], null);
+
+                expect(poi.title).toEqual("id001");
+            });
+
         });
 
     });

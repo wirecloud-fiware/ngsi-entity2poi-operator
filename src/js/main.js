@@ -94,6 +94,7 @@ var entity2poi, processData, processEntity;
             icon: icon,
             tooltip: entity.id,
             data: entity,
+            title: entity.id,
             infoWindow: buildInfoWindow.call(this, entity),
         };
 
