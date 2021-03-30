@@ -91,7 +91,10 @@ var entity2poi, processData, processEntity;
     entity2poi = function entity2poi(entity, coordinates, geojson) {
         var poi = {
             id: entity.id,
-            icon: icon,
+            image: {
+                anchor: [0.5, 1],
+                src: icon
+            },
             tooltip: entity.id,
             data: entity,
             title: entity.id,
