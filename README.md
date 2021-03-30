@@ -2,7 +2,7 @@
 
 [![](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/visualization.svg)](https://www.fiware.org/developers/catalogue/)
 ![](https://img.shields.io/github/license/wirecloud-fiware/ngsi-entity2poi-operator.svg)<br/>
-[![Build Status](https://travis-ci.org/wirecloud-fiware/ngsi-entity2poi-operator.svg?branch=develop)](https://travis-ci.org/wirecloud-fiware/ngsi-entity2poi-operator)
+[![Tests](https://github.com/wirecloud-fiware/ngsi-entity2poi-operator/workflows/Tests/badge.svg)](https://github.com/wirecloud-fiware/ngsi-entity2poi-operator/actions?query=workflow%3A%22Tests%22)
 [![Coverage Status](https://coveralls.io/repos/github/wirecloud-fiware/ngsi-entity2poi-operator/badge.svg?branch=develop)](https://coveralls.io/github/wirecloud-fiware/ngsi-entity2poi-operator?branch=develop)
 
 This [WireCloud operator](http://wirecloud.readthedocs.org/en/latest/) transforms NGSI entities (as the ones coming from
