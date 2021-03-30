@@ -40,20 +40,8 @@ module.exports = function (grunt) {
             }
         },
 
-        coveralls: {
-            library: {
-                src: 'build/coverage/lcov/lcov.info',
-            }
-        },
-
         karma: {
             options: {
-                customLaunchers: {
-                    ChromeNoSandbox: {
-                        base: "Chrome",
-                        flags: ['--no-sandbox']
-                    }
-                },
                 files: [
                     'node_modules/mock-applicationmashup/dist/MockMP.js',
                     'src/js/*.js',
@@ -61,7 +49,7 @@ module.exports = function (grunt) {
                 ],
                 frameworks: ['jasmine'],
                 reporters: ['progress', 'coverage'],
-                browsers: ['Chrome', 'Firefox'],
+                browsers: ['ChromeHeadless', 'FirefoxHeadless'],
                 singleRun: true
             },
             operator: {
@@ -75,13 +63,18 @@ module.exports = function (grunt) {
                     }
                 }
             },
+            operatordebug: {
+                options: {
+                    browsers: ["Chrome"],
+                    singleRun: false
+                }
+            },
             operatorci: {
                 options: {
                     junitReporter: {
                         "outputDir": 'build/test-reports'
                     },
-                    reporters: ['junit', 'coverage'],
-                    browsers: ['ChromeNoSandbox', 'Firefox'],
+                    reporters: ['junit', 'coverage', 'progress'],
                     coverageReporter: {
                         reporters: [
                             {type: 'cobertura', dir: 'build/coverage', subdir: 'xml'},
@@ -178,7 +171,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-compress');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-coveralls');
     grunt.loadNpmTasks('grunt-strip-code');
     grunt.loadNpmTasks('grunt-text-replace');
 
@@ -187,10 +179,14 @@ module.exports = function (grunt) {
         'karma:operator'
     ]);
 
+    grunt.registerTask('debug', [
+        'eslint',
+        'karma:operatordebug'
+    ]);
+
     grunt.registerTask('ci', [
         'eslint',
-        'karma:operatorci',
-        'coveralls'
+        'karma:operatorci'
     ]);
 
     grunt.registerTask('build', [

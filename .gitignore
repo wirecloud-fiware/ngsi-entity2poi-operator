@@ -3,6 +3,7 @@ node_modules/
 src/bower_components/
 dist/
 build/
+coverage/
 _SpecRunner.html
 src/js/.tern-port
 .DS_Store
