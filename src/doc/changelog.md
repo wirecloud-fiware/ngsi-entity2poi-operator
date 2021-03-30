@@ -1,4 +1,4 @@
-## 3.2.1 (2021-XX-XX)
+## 3.2.1 (2021-03-30)
 
 - Add tooltip title
 - Provide anchor details when sending poi events
