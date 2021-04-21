@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2014 CoNWeT Lab., Universidad Politécnica de Madrid
- * Copyright (c) 2018 Future Internet Consulting and Development Solutions S.L.
+ * Copyright (c) 2018-2021 Future Internet Consulting and Development Solutions S.L.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -91,7 +91,7 @@ var entity2poi, processData, processEntity;
     entity2poi = function entity2poi(entity, coordinates, geojson) {
         var poi = {
             id: entity.id,
-            image: {
+            icon: {
                 anchor: [0.5, 1],
                 src: icon
             },

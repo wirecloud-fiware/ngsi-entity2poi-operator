@@ -1,3 +1,8 @@
+## 3.2.2 (2021-04-21)
+
+- Fix problems sending icon configuration
+
+
 ## 3.2.1 (2021-03-30)
 
 - Add tooltip title
